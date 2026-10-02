@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>People Scoop! N°1 · Spécial Estelle</title>
+<meta name="description" content="Le numéro spécial anniversaire d'Estelle, 29 septembre.">
+<!-- Le site ne doit pas apparaître dans Google : seules les personnes qui ont le lien le voient -->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="People Scoop! N°1 · Spécial Estelle">
+<meta property="og:description" content="Louchage, nez hors normes, canapé suédois : toutes les révélations.">
+<meta property="og:image" content="og-image.jpg">
+<meta name="theme-color" content="#e30613">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23e30613'/><text x='32' y='46' font-size='40' font-family='Arial' font-weight='700' font-style='italic' fill='white' text-anchor='middle'>P!</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@1,700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e30613;
+    --mag: #e6007e;
+    --yellow: #ffe500;
+    --ink: #111;
+    --bg: #1b1b1f;
+    --cond: "Archivo Narrow", "Arial Narrow", sans-serif;
+    --sans: "Poppins", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(ellipse at 50% 40%, #34343c 0%, var(--bg) 70%);
+    color: #fff; font-family: var(--sans); overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+
+  /* ---------- Intro ---------- */
+  #intro {
+    position: fixed; inset: 0; z-index: 50; background: var(--red);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px;
+    transition: transform .9s cubic-bezier(.7,0,.2,1), opacity .9s;
+  }
+  #intro.gone { transform: translateY(-100%); opacity: .6; pointer-events: none; }
+  .logo {
+    font-family: var(--cond); font-style: italic; font-weight: 700; line-height: .85;
+    font-size: clamp(64px, 16vw, 190px); letter-spacing: -.01em;
+    display: flex; flex-wrap: wrap; justify-content: center;
+  }
+  .logo span { display: inline-block; opacity: 0; transform: translateY(40px) rotate(-6deg); animation: pop .55s cubic-bezier(.2,1.6,.4,1) forwards; }
+  @keyframes pop { to { opacity: 1; transform: none; } }
+  .strip {
+    margin-top: 22px; background: var(--yellow); color: var(--ink); font-family: var(--cond); font-weight: 700;
+    font-size: clamp(16px, 3.4vw, 28px); text-transform: uppercase; padding: 6px 16px; transform: rotate(-2deg) scale(0);
+    animation: stamp .5s 1.3s cubic-bezier(.2,1.8,.4,1) forwards;
+  }
+  @keyframes stamp { to { transform: rotate(-2deg) scale(1); } }
+  .burst {
+    position: absolute; top: 9%; right: 8%; width: clamp(90px, 16vw, 150px); aspect-ratio: 1; background: var(--yellow); color: var(--ink);
+    clip-path: polygon(50% 0%, 61% 15%, 79% 9%, 79% 27%, 97% 32%, 86% 47%, 97% 63%, 79% 69%, 79% 88%, 61% 83%, 50% 100%, 39% 83%, 21% 88%, 21% 69%, 3% 63%, 14% 47%, 3% 32%, 21% 27%, 21% 9%, 39% 15%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--cond); font-weight: 700; line-height: .95;
+    font-size: clamp(12px, 2.2vw, 20px); text-transform: uppercase;
+    animation: spin 8s linear infinite, fade .4s 1.8s both;
+  }
+  .burst b { color: var(--mag); font-size: 1.6em; }
+  @keyframes spin { to { rotate: 360deg; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  .open {
+    margin-top: 38px; background: var(--ink); color: var(--yellow); font-family: var(--cond); font-weight: 700; font-size: clamp(18px, 3vw, 24px);
+    text-transform: uppercase; padding: 14px 30px; border-radius: 999px; box-shadow: 0 6px 0 #000;
+    opacity: 0; animation: fade .5s 2s forwards, bounce 1.6s 2.6s ease-in-out infinite;
+  }
+  .open:active { transform: translateY(4px); box-shadow: 0 2px 0 #000; }
+  @keyframes bounce { 50% { transform: translateY(-6px); } }
+  .intro-sub { margin-top: 16px; font-size: 13px; opacity: 0; animation: fade .5s 2.2s forwards; }
+  .loading { margin-top: 10px; font-size: 12px; opacity: .8; min-height: 1em; }
+
+  /* ---------- Stage ---------- */
+  #stage { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 12px 86px; }
+  .book-wrap { width: min(96vw, calc((100vh - 120px) * 1.414)); opacity: 0; transform: scale(.85) translateY(30px); transition: opacity .8s .3s, transform 1s .3s cubic-bezier(.2,1.2,.3,1); }
+  body.portrait .book-wrap { width: min(94vw, calc((100vh - 120px) * .707)); }
+  body.ready .book-wrap { opacity: 1; transform: none; }
+  .page { background: #fff; overflow: hidden; }
+  .page img { width: 100%; height: 100%; object-fit: cover; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+  .stf__parent { margin: 0 auto; }
+
+  /* ---------- Toolbar ---------- */
+  .bar {
+    position: fixed; left: 50%; bottom: 16px; transform: translate(-50%, 140%); transition: transform .7s .9s cubic-bezier(.2,1.3,.3,1);
+    display: flex; align-items: center; gap: 4px; background: rgba(17,17,17,.88); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 6px; z-index: 10; max-width: calc(100vw - 24px);
+  }
+  body.ready .bar { transform: translate(-50%, 0); }
+  .bar button { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; transition: background .2s; flex: none; }
+  .bar button:hover { background: rgba(255,255,255,.12); }
+  .bar svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .count { font-family: var(--cond); font-weight: 700; font-size: 17px; min-width: 74px; text-align: center; letter-spacing: .02em; }
+  .count b { color: var(--yellow); }
+  .sep { width: 1px; height: 24px; background: rgba(255,255,255,.18); margin: 0 4px; flex: none; }
+  .bar .dl { height: 42px; align-items: center; color: #fff; text-decoration: none; width: auto; padding: 0 16px; border-radius: 999px; background: var(--red); font-family: var(--cond); font-weight: 700; text-transform: uppercase; font-size: 15px; gap: 6px; display: flex; }
+  .bar .dl:hover { background: #ff1a2a; }
+
+  /* ---------- Sommaire ---------- */
+  #toc {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(360px, 88vw); background: #111; z-index: 20; padding: 24px 20px;
+    transform: translateX(105%); transition: transform .45s cubic-bezier(.2,1,.3,1); overflow-y: auto; box-shadow: -10px 0 40px rgba(0,0,0,.5);
+  }
+  #toc.open { transform: none; }
+  #toc h2 { font-family: var(--cond); font-style: italic; font-size: 30px; color: var(--red); margin-bottom: 4px; }
+  #toc p { font-size: 12px; opacity: .6; margin-bottom: 18px; }
+  #toc .close { position: absolute; top: 16px; right: 14px; width: 38px; height: 38px; border-radius: 50%; font-size: 22px; }
+  .toc-item { display: grid; grid-template-columns: 54px 1fr auto; gap: 12px; align-items: center; width: 100%; text-align: left; padding: 8px; border-radius: 10px; transition: background .2s; }
+  .toc-item:hover { background: rgba(255,255,255,.08); }
+  .toc-item img { width: 54px; height: 76px; object-fit: cover; border-radius: 3px; box-shadow: 0 2px 8px rgba(0,0,0,.5); }
+  .toc-item .k { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mag); font-weight: 700; }
+  .toc-item .t { font-family: var(--cond); font-weight: 700; font-size: 17px; line-height: 1.1; }
+  .toc-item .p { font-family: var(--cond); font-weight: 700; color: var(--yellow); }
+  #veil { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 15; opacity: 0; pointer-events: none; transition: opacity .3s; }
+  #veil.on { opacity: 1; pointer-events: auto; }
+
+  .hint {
+    position: fixed; top: 16px; left: 50%; transform: translateX(-50%); font-size: 12px; background: rgba(0,0,0,.6); padding: 6px 14px; border-radius: 999px;
+    opacity: 0; transition: opacity .6s; pointer-events: none; z-index: 5; white-space: nowrap;
+  }
+  .hint.on { opacity: 1; }
+
+  @media (max-width: 560px) {
+    .count { min-width: 58px; font-size: 15px; }
+    .bar button { width: 38px; height: 38px; }
+    .bar .dl span { display: none; }
+    .bar .dl { padding: 0 11px; }
+    .hide-sm { display: none !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ Écran d'accueil ============ -->
+<section id="intro">
+  <div class="burst">Joyeux<b>anniv'</b>29/09</div>
+  <h1 class="logo" aria-label="People Scoop!"></h1>
+  <div class="strip">Spécial Estelle · N°1</div>
+  <button class="open" id="openBtn">Ouvrir le magazine</button>
+  <div class="intro-sub">Louchage, nez hors normes, canapé suédois : toutes les révélations</div>
+  <div class="loading" id="loading"></div>
+</section>
+
+<!-- ============ Le magazine ============ -->
+<main id="stage">
+  <div class="hint" id="hint">Clique sur les coins ou fais glisser pour tourner les pages</div>
+  <div class="book-wrap"><div id="book"></div></div>
+</main>
+
+<nav class="bar" aria-label="Navigation">
+  <button id="first" class="hide-sm" title="Couverture"><svg viewBox="0 0 24 24"><path d="M18 18l-6-6 6-6M11 18l-6-6 6-6"/></svg></button>
+  <button id="prev" title="Page précédente"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <div class="count" id="count">1 / 16</div>
+  <button id="next" title="Page suivante"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+  <div class="sep"></div>
+  <button id="tocBtn" title="Sommaire"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></button>
+  <button id="fsBtn" class="hide-sm" title="Plein écran"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  <button id="party" title="Confettis !"><svg viewBox="0 0 24 24"><path d="M4 20l5-14 9 9-14 5zM14 4l1 2M19 9l2-1M17 3l-1 3M20 6l-3 1"/></svg></button>
+  <a class="dl" href="people-scoop-n1.pdf" download title="Télécharger le PDF"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>PDF</span></a>
+</nav>
+
+<div id="veil"></div>
+<aside id="toc" aria-label="Sommaire">
+  <button class="close" id="tocClose" aria-label="Fermer">×</button>
+  <h2>Sommaire</h2>
+  <p>People Scoop! N°1 · 29 septembre 2026</p>
+  <div id="tocList"></div>
+</aside>
+
+<script src="js/page-flip.browser.js"></script>
+<script src="js/confetti.browser.js"></script>
+<script>
+  // ====== Configuration : modifie ici si tu ajoutes ou retires des pages ======
+  const PAGE_COUNT = 16;
+  const pageSrc = n => `pages/page-${String(n).padStart(2, "0")}.jpg`;
+  const SOMMAIRE = [
+    { p: 1,  k: "Couverture",       t: "Estelle !" },
+    { p: 2,  k: "Science & beauté", t: "Physiologie du louchage volontaire" },
+    { p: 4,  k: "Dossier confidentiel", t: "Le Grand Nez" },
+    { p: 6,  k: "Enquête",          t: "Le mystère des vélos de Porsögården" },
+    { p: 7,  k: "Appel à témoins",  t: "Individus dangereux" },
+    { p: 8,  k: "Publicité",        t: "Nescafé, édition Estelle" },
+    { p: 10, k: "Cœur & people",    t: "De la banquise à la galerie des glaces" },
+    { p: 12, k: "Scandale d'État",  t: "Estelle embrasse Hugo à Amsterdam" },
+    { p: 14, k: "Jeux",             t: "Les mots croisés d'Estelle" },
+    { p: 15, k: "Cadeau",           t: "Bon pour un spa" },
+    { p: 16, k: "4e de couverture", t: "Joyeux anniversaire Estelle !" },
+  ];
+  // ============================================================================
+
+  const $ = id => document.getElementById(id);
+
+  // Logo animé lettre par lettre
+  [..."People Scoop!"].forEach((ch, i) => {
+    const s = document.createElement("span");
+    s.textContent = ch === " " ? " " : ch;
+    s.style.animationDelay = (0.15 + i * 0.06) + "s";
+    $("intro").querySelector(".logo").appendChild(s);
+  });
+
+  // Préchargement des pages
+  let loaded = 0;
+  const imgs = [];
+  for (let n = 1; n <= PAGE_COUNT; n++) {
+    const im = new Image();
+    im.onload = im.onerror = () => { loaded++; $("loading").textContent = loaded < PAGE_COUNT ? `Impression en cours… ${Math.round(loaded / PAGE_COUNT * 100)} %` : ""; };
+    im.src = pageSrc(n);
+    imgs.push(im);
+  }
+
+  // Construction des pages du livre
+  const book = $("book");
+  for (let n = 1; n <= PAGE_COUNT; n++) {
+    const d = document.createElement("div");
+    d.className = "page";
+    if (n === 1 || n === PAGE_COUNT) d.dataset.density = "hard";
+    d.innerHTML = `<img src="${pageSrc(n)}" alt="Page ${n}" loading="${n <= 3 ? "eager" : "lazy"}">`;
+    book.appendChild(d);
+  }
+
+  const isPortrait = () => window.innerWidth < 760 || window.innerWidth < window.innerHeight * 0.9;
+  document.body.classList.toggle("portrait", isPortrait());
+
+  const flip = new St.PageFlip(book, {
+    width: 595, height: 842, size: "stretch",
+    minWidth: 240, maxWidth: 1400, minHeight: 340, maxHeight: 1980,
+    showCover: true, usePortrait: true, maxShadowOpacity: 0.45,
+    flippingTime: 850, mobileScrollSupport: false, drawShadow: true,
+  });
+  flip.loadFromHTML(book.querySelectorAll(".page"));
+
+  const count = $("count");
+  const updateCount = () => {
+    const i = flip.getCurrentPageIndex();
+    const portrait = flip.getOrientation() === "portrait";
+    let label;
+    if (portrait || i === 0 || i === PAGE_COUNT - 1) label = `<b>${i + 1}</b> / ${PAGE_COUNT}`;
+    else { const a = i % 2 ? i + 1 : i; label = `<b>${a}-${a + 1}</b> / ${PAGE_COUNT}`; }
+    count.innerHTML = label;
+  };
+  flip.on("flip", e => {
+    updateCount();
+    if (e.data === PAGE_COUNT - 1) setTimeout(bigParty, 500);   // confettis à la dernière page
+  });
+  flip.on("changeOrientation", updateCount);
+  updateCount();
+
+  $("prev").onclick = () => flip.flipPrev();
+  $("next").onclick = () => flip.flipNext();
+  $("first").onclick = () => flip.flip(0);
+  document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") flip.flipNext();
+    if (e.key === "ArrowLeft") flip.flipPrev();
+    if (e.key === "Escape") closeToc();
+  });
+
+  // Sommaire
+  const list = $("tocList");
+  SOMMAIRE.forEach(s => {
+    const b = document.createElement("button");
+    b.className = "toc-item";
+    b.innerHTML = `<img src="${pageSrc(s.p)}" alt=""><span><span class="k">${s.k}</span><span class="t">${s.t}</span></span><span class="p">p.${s.p}</span>`;
+    b.onclick = () => { closeToc(); setTimeout(() => flip.flip(s.p - 1), 350); };
+    list.appendChild(b);
+  });
+  const openToc = () => { $("toc").classList.add("open"); $("veil").classList.add("on"); };
+  const closeToc = () => { $("toc").classList.remove("open"); $("veil").classList.remove("on"); };
+  $("tocBtn").onclick = openToc; $("tocClose").onclick = closeToc; $("veil").onclick = closeToc;
+
+  // Plein écran
+  $("fsBtn").onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.();
+
+  // Confettis aux couleurs du magazine
+  const colors = ["#e30613", "#e6007e", "#ffe500", "#ffffff"];
+  const party = () => confetti({ particleCount: 140, spread: 90, origin: { y: .7 }, colors });
+  function bigParty() {
+    const end = Date.now() + 1800;
+    (function frame() {
+      confetti({ particleCount: 6, angle: 60, spread: 60, origin: { x: 0, y: .8 }, colors });
+      confetti({ particleCount: 6, angle: 120, spread: 60, origin: { x: 1, y: .8 }, colors });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    })();
+  }
+  $("party").onclick = party;
+
+  // Ouverture
+  function openMag() {
+    $("intro").classList.add("gone");
+    document.body.classList.add("ready");
+    setTimeout(bigParty, 600);
+    setTimeout(() => $("hint").classList.add("on"), 1800);
+    setTimeout(() => $("hint").classList.remove("on"), 6000);
+  }
+  $("openBtn").onclick = openMag;
+
+  window.addEventListener("resize", () => document.body.classList.toggle("portrait", isPortrait()));
+</script>
+</body>
+</html>
